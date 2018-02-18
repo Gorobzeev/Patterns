@@ -6,12 +6,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Creator creator = makeWatch("digital");
-        Watch watch = creator.create();
+        Factory fac = new RomeWatchCreator();
+        Watch watch1 = fac.create();
+
+
+        Factory factory = makeWatch("digital");
+        Watch watch = factory.create();
         watch.showTime();
     }
 
-    private static Creator makeWatch(String marker) {
+    private static Factory makeWatch(String marker) {
         switch (marker) {
             case "digital":
                 return new DigitalWatchCreator();
@@ -43,11 +47,11 @@ class RomeWatch implements Watch {
     }
 }
 
-interface Creator {
+interface Factory {
     Watch create();
 }
 
-class DigitalWatchCreator implements Creator {
+class DigitalWatchCreator implements Factory {
 
     @Override
     public Watch create() {
@@ -55,7 +59,7 @@ class DigitalWatchCreator implements Creator {
     }
 }
 
-class RomeWatchCreator implements Creator {
+class RomeWatchCreator implements Factory {
 
     @Override
     public Watch create() {
